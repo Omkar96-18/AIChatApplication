@@ -1,42 +1,35 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import "tailwindcss";
+
+.message {
+  @apply m-5 max-w-xl rounded-lg py-2 px-5 break-words inline-block shadow-sm;
+  clear: both;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.message.user {
+  @apply float-right bg-green-400;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.message.ai {
+  @apply float-left bg-gray-100;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.timestamp {
+  @apply mt-1 text-xs block;
 }
 
-.card {
-  padding: 2em;
+.timestamp.user {
+  @apply text-gray-100 text-right;
 }
 
-.read-the-docs {
-  color: #888;
+.timestamp.ai {
+  @apply text-gray-500 text-left;
+}
+
+
+.message.user {
+  margin-left: 25%;
+}
+
+.message.ai {
+  margin-right: 25%;
 }
