@@ -71,4 +71,9 @@ npm run dev
 **Frontend: http://localhost:3000**
 **Backend: http://localhost:8000**
 
+# Tech Stack and Workflow for above project
+
+![tech stack image](image.png)
+
+
 
