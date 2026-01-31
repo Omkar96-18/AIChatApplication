@@ -77,20 +77,20 @@ export default function Chat() {
           use_web_search: webSearch,
         }),
       });
-
-
-      const aiMessage =
-      {
-        sender: "ai",
-        text: data.response,
-        created_at: data.created_at || new Date().toISOString(),
-      };
-
+      
+      
+      const aiMessage = 
+        {
+          sender: "ai",
+          text: data.response,
+          created_at: data.created_at || new Date().toISOString(),
+        };
+    
       setMessages((prev) => [...prev, aiMessage]);
-
+      
       setActiveSessionId(data.session_id);
       loadSessions();
-
+      
     } finally {
       setMessage("");
       setLoading(false);
@@ -98,11 +98,11 @@ export default function Chat() {
   };
 
   useEffect(() => {
-    chatRef.current?.scrollTo({
-      top: chatRef.current.scrollHeight,
-      behavior: "smooth",
-    });
-  }, [messages]);
+  chatRef.current?.scrollTo({
+    top: chatRef.current.scrollHeight,
+    behavior: "smooth",
+  });
+}, [messages]);
 
 
   const logout = () => {
@@ -198,16 +198,17 @@ export default function Chat() {
                 </div>
               )}
             </div>
-
+            
           ))}
+          
           {loading && (
-            <div className="message ai">
-              <div className="prose prose-invert max-w-none leading-relaxed text-gray-400">
-                AI is thinking…
-              </div>
+          <div className="message ai">
+            <div className="prose prose-invert max-w-none leading-relaxed text-gray-400">
+              AI is thinking…
             </div>
-          )}
-
+          </div>
+        )}
+          
         </div>
 
         {isFirstMessage ? (
