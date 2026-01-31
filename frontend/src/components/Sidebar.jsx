@@ -15,9 +15,9 @@ export default function Sidebar({
         
         <button
           onClick={newChat}
-          className="mb-4 w-full rounded bg-green-600 py-2 text-white hover:bg-green-700 transition-colors"
+          className="mb-4 w-full rounded-xl bg-green-600 py-2 text-white hover:bg-green-700 transition-colors flex justify-center items-center uppercase font-[600]"
         >
-          + New Chat
+          <img src="/icons/create-chat-dark.svg" alt="create-chat" className="h-[30px]"/> New Chat
         </button>
 
         <div className="flex-1 overflow-y-auto space-y-1 pr-1 bg-gray-300 rounded-xl py-5 px-2 cursor-pointer">
@@ -37,7 +37,7 @@ export default function Sidebar({
                 onClick={() => deleteSession(s.id)}
                 className="ml-2 hover:scale-110 transition-all"
               >
-                ❌
+                <img src="/icons/delete.svg" alt="delete_image" className="h-[25px]"/>
               </button>
             </div>
           ))}

@@ -59,36 +59,51 @@ export default function Chat() {
   const sendMessage = async () => {
     if (!message.trim()) return;
 
-    setMessages((m) => [...m, { sender: "user", text: message }]);
+    const userMessage = { sender: "user", text: message };
+
+    setMessages((prev) => [...prev, userMessage]);
     setLoading(true);
+    setMessage("");
 
-    const data = await apiFetch("/chat", {
-      method: "POST",
-      body: JSON.stringify({
-        message,
-        session_id: activeSessionId,
-        user_id: getUserId(),
-        role,
-        use_web_search: webSearch,
-      }),
-    });
+    try {
 
-    setMessages((m) => [
-      ...m,
+      const data = await apiFetch("/chat", {
+        method: "POST",
+        body: JSON.stringify({
+          message,
+          session_id: activeSessionId,
+          user_id: getUserId(),
+          role,
+          use_web_search: webSearch,
+        }),
+      });
+
+
+      const aiMessage =
       {
         sender: "ai",
         text: data.response,
         created_at: data.created_at || new Date().toISOString(),
-      },
-    ]);
+      };
 
+      setMessages((prev) => [...prev, aiMessage]);
 
-    setActiveSessionId(data.session_id);
-    loadSessions();
+      setActiveSessionId(data.session_id);
+      loadSessions();
 
-    setMessage("");
-    setLoading(false);
+    } finally {
+      setMessage("");
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    chatRef.current?.scrollTo({
+      top: chatRef.current.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [messages]);
+
 
   const logout = () => {
     clearAuth();
@@ -128,8 +143,8 @@ export default function Chat() {
   ];
 
   useEffect(() => {
-  setRole(selectedRole.toLowerCase());
-}, [selectedRole]);
+    setRole(selectedRole.toLowerCase());
+  }, [selectedRole]);
 
 
 
@@ -175,15 +190,24 @@ export default function Chat() {
               </div>
               {m.created_at && (
                 <div className={`timestamp ${m.sender}`}>
-                  {new Date(m.created_at).toLocaleTimeString([], {
+                  {new Date(m.created_at).toLocaleTimeString("en-IN", {
                     hour: "2-digit",
                     minute: "2-digit",
+                    timeZone: "Asia/Kolkata",
                   })}
                 </div>
               )}
             </div>
+
           ))}
-          {loading && <div className="text-gray-400">AI is thinking…</div>}
+          {loading && (
+            <div className="message ai">
+              <div className="prose prose-invert max-w-none leading-relaxed text-gray-400">
+                AI is thinking…
+              </div>
+            </div>
+          )}
+
         </div>
 
         {isFirstMessage ? (
@@ -198,6 +222,7 @@ export default function Chat() {
                 <div className="flex gap-4">
                   {roles.map((role) => (
                     <div
+                      disabled={loading}
                       key={role.name}
                       onClick={() => setSelectedRole(role.name)}
                       className={`cursor-pointer px-4 py-2 rounded-full transition-all ${selectedRole === role.name
@@ -212,6 +237,7 @@ export default function Chat() {
 
                 <label className="group relative inline-flex items-center cursor-pointer select-none">
                   <input
+                    disabled={loading}
                     type="checkbox"
                     checked={webSearch}
                     onChange={(e) => setWebSearch(e.target.checked)}
@@ -235,6 +261,7 @@ export default function Chat() {
 
               <div className="flex transition-all duration-300">
                 <input
+                  disabled={loading}
                   className={`flex-1 rounded-l-md border p-2 outline-none transition-colors ${selectedRole
                     ? `border-2 ${roles.find(r => r.name === selectedRole)?.color.replace('bg-', 'border-')}`
                     : "border-gray-300"
@@ -245,6 +272,7 @@ export default function Chat() {
                   placeholder={`Start new conversation with ${selectedRole}...`}
                 />
                 <button
+                  disabled={loading}
                   onClick={sendMessage}
                   className={`px-6 py-2 rounded-r-md text-white font-medium transition-all active:scale-95 ${selectedRole
                     ? roles.find(r => r.name === selectedRole)?.color
@@ -264,6 +292,7 @@ export default function Chat() {
               <div className="flex gap-4">
                 {roles.map((role) => (
                   <div
+                    disabled={loading}
                     key={role.name}
                     onClick={() => setSelectedRole(role.name)}
                     className={`cursor-pointer px-4 py-2 rounded-full transition-all ${selectedRole === role.name
@@ -278,6 +307,7 @@ export default function Chat() {
 
               <label className="group relative inline-flex items-center cursor-pointer select-none">
                 <input
+                  disabled={loading}
                   type="checkbox"
                   checked={webSearch}
                   onChange={(e) => setWebSearch(e.target.checked)}
@@ -300,6 +330,7 @@ export default function Chat() {
 
             <div className="flex transition-all duration-300">
               <input
+                disabled={loading}
                 className={`flex-1 rounded-l-md border p-2 outline-none transition-colors bg-white ${selectedRole
                   ? `border-2 ${roles.find(r => r.name === selectedRole)?.color.replace('bg-', 'border-')}`
                   : "border-gray-300"
@@ -310,6 +341,7 @@ export default function Chat() {
                 placeholder={`Have a Chat with ${selectedRole}...`}
               />
               <button
+                disabled={loading}
                 onClick={sendMessage}
                 className={`px-6 py-2 rounded-r-md text-white font-medium transition-all active:scale-95 ${selectedRole
                   ? roles.find(r => r.name === selectedRole)?.color

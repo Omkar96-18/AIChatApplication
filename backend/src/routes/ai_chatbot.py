@@ -12,8 +12,14 @@ from ..chatbot.ai_model import (
     AIResponseGenerator
 )
 from typing import Optional, List
-from datetime import datetime
+from datetime import datetime, timedelta
+
 from ..utils.authentication import create_access_token, verify_access_token, get_current_user
+
+
+ist_time = (datetime.utcnow() + timedelta(hours=5, minutes=30)).strftime(
+    "%Y-%m-%d %H:%M:%S"
+)
 
 router = APIRouter()
 
@@ -116,13 +122,13 @@ async def chat(
         if session is None:
             session = create_new_session(
                 db=db,
-                title="Chat "+ datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
+                title="Chat "+ ist_time,
                 user_id=user.id
             )
     else:
         session = create_new_session(
             db=db, 
-            title="Chat "+ datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
+            title="Chat "+ ist_time,
             user_id=user.id
         )
     create_new_chat(
