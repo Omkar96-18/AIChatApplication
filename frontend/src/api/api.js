@@ -25,7 +25,10 @@ export const apiFetch = async (url, options = {}) => {
     },
   });
 
-  const data = await res.json();
-  if (!res.ok) alert(data.detail || "API Error");
-  return data;
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.message);
+  }
+
+  return res.json();
 };

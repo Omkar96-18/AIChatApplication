@@ -27,7 +27,7 @@ export default function Register() {
 
       navigate("/login");
     } catch (e) {
-      alert(e.message);
+      alert("Already used email");
     } finally {
       setLoading(false);
     }
@@ -37,7 +37,7 @@ export default function Register() {
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500">
       <div className="w-[380px] rounded-2xl bg-white/90 p-8 shadow-2xl backdrop-blur">
         <h2 className="mb-2 text-2xl font-bold text-gray-800">
-          Create Account 🚀
+          Create Account
         </h2>
         <p className="mb-6 text-sm text-gray-500">
           Join us and start your journey

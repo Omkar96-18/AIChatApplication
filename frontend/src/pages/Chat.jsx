@@ -127,6 +127,11 @@ export default function Chat() {
     },
   ];
 
+  useEffect(() => {
+  setRole(selectedRole.toLowerCase());
+}, [selectedRole]);
+
+
 
   return (
     <div className="flex h-screen bg-gray-300">

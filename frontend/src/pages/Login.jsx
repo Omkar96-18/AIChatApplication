@@ -26,7 +26,17 @@ export default function Login() {
         }),
       });
 
+      console.log(data);
+      
+
       login(data.access_token, data.user_id);
+
+      const user = await apiFetch(`/users/${data.user_id}`)
+
+      if (!user || !user.user_id) {
+        throw new Error("User not found or not signed in");
+      }
+
       setSuccess(true);
 
       setTimeout(() => {
@@ -34,6 +44,8 @@ export default function Login() {
       }, 1200);
     } catch (e) {
       alert(e.message || "Login failed");
+      console.log(e);
+      
     } finally {
       setLoading(false);
     }
