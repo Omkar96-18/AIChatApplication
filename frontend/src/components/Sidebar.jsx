@@ -8,58 +8,78 @@ export default function Sidebar({
   logout,
 }) {
   return (
-    <div className="flex h-auto w-72 flex-col border-r bg-gray-50 p-4 bg-gray-50 py-5 my-2 mx-2 rounded-xl">
+  <div className="flex h-auto w-72 flex-col rounded-2xl border bg-gray-50 p-4 m-2 shadow-sm">
 
-      <div className="flex flex-1 flex-col overflow-hidden">
-        <h3 className="mb-4 text-lg font-semibold px-2">Chats</h3>
-        
-        <button
-          onClick={newChat}
-          className="mb-4 w-full rounded-xl bg-green-600 py-2 text-white hover:bg-green-700 transition-colors flex justify-center items-center uppercase font-[600]"
-        >
-          <img src="/icons/create-chat-dark.svg" alt="create-chat" className="h-[30px]"/> New Chat
-        </button>
+    <div className="flex flex-1 flex-col overflow-hidden">
+      <h3 className="mb-4 px-2 text-lg font-semibold tracking-tight text-gray-900">
+        Chats
+      </h3>
 
-        <div className="flex-1 overflow-y-auto space-y-1 pr-1 bg-gray-300 rounded-xl py-5 px-2 cursor-pointer">
-          {sessions.map((s) => (
-            <div
-              key={s.id}
-              className={`flex items-center justify-between rounded-xl p-2 text-sm cursor-pointertransition-colors ${
-                s.id === activeSessionId
-                  ? "bg-blue-400"
-                  : "hover:bg-green-200"
-              }`}
-            >
-              <span className="truncate flex-1" onClick={() => loadSession(s.id)}>
-                {s.title}
-              </span>
-              <button 
-                onClick={() => deleteSession(s.id)}
-                className="ml-2 hover:scale-110 transition-all"
-              >
-                <img src="/icons/delete.svg" alt="delete_image" className="h-[25px]"/>
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
+      <button
+        onClick={newChat}
+        className="mb-4 flex w-full items-center justify-center gap-2 rounded-xl bg-green-700 py-2.5 text-sm font-semibold uppercase text-white transition hover:bg-green-600"
+      >
+        <img
+          src="/icons/create-chat-dark.svg"
+          alt="create-chat"
+          className="h-[26px]"
+        />
+        New Chat
+      </button>
 
- 
-      <div className="mt-4 border-t pt-4">
-        <div className="rounded-lg bg-white p-3 shadow-sm border border-gray-200">
-          <div className="mb-3 text-sm">
-            <p className="font-bold text-gray-800 truncate">{userInfo?.user_name || "Guest"}</p>
-            <p className="text-xs text-gray-500 truncate">{userInfo?.user_email_id}</p>
-          </div>
-          
-          <button
-            onClick={logout}
-            className="w-full rounded bg-red-500 py-1.5 text-sm text-white hover:bg-red-600 transition-colors"
+      <div className="flex-1 space-y-1 overflow-y-auto rounded-xl bg-gray-100 px-2 py-3">
+        {sessions.map((s) => (
+          <div
+            key={s.id}
+            className={`flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${
+              s.id === activeSessionId
+                ? "bg-green-400 text-white"
+                : "hover:bg-green-200 text-gray-800 hover:scale-101 transition-all"
+            }`}
           >
-            Logout
-          </button>
-        </div>
+            <span
+              className="flex-1 truncate"
+              onClick={() => loadSession(s.id)}
+            >
+              {s.title}
+            </span>
+
+            <button
+              onClick={() => deleteSession(s.id)}
+              className="ml-2 opacity-70 transition hover:opacity-100 hover:scale-105"
+            >
+              <img
+                src="/icons/delete.svg"
+                alt="delete_image"
+                className="h-[20px]"
+              />
+            </button>
+          </div>
+        ))}
       </div>
     </div>
-  );
+
+
+    <div className="mt-4 border-t pt-4">
+      <div className="rounded-xl border bg-white p-3 shadow-sm">
+        <div className="mb-3 text-sm">
+          <p className="truncate font-medium text-gray-900">
+            {userInfo?.user_name || "Guest"}
+          </p>
+          <p className="truncate text-xs text-gray-500">
+            {userInfo?.user_email_id}
+          </p>
+        </div>
+
+        <button
+          onClick={logout}
+          className="w-full rounded-lg bg-red-600 py-1.5 text-sm font-medium text-white transition hover:bg-red-400"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
 }

@@ -34,55 +34,83 @@ export default function Register() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500">
-      <div className="w-[380px] rounded-2xl bg-white/90 p-8 shadow-2xl backdrop-blur">
-        <h2 className="mb-2 text-2xl font-bold text-gray-800">
-          Create Account
+  <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-100 via-gray-50 to-gray-200">
+    <div className="w-[400px] rounded-2xl bg-white/80 p-8 shadow-xl backdrop-blur-md">
+      
+
+      <div className="mb-6 text-center">
+        <h2 className="text-2xl font-semibold text-gray-900">
+          Create your account
         </h2>
-        <p className="mb-6 text-sm text-gray-500">
-          Join us and start your journey
-        </p>
-
-        <input
-          className="mb-3 w-full rounded-lg border px-3 py-2 outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
-          placeholder="Full Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <input
-          className="mb-3 w-full rounded-lg border px-3 py-2 outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
-          placeholder="Email address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <input
-          type="password"
-          className="mb-5 w-full rounded-lg border px-3 py-2 outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <button
-          onClick={register}
-          disabled={loading}
-          className="w-full rounded-lg bg-green-600 py-2 font-semibold text-white transition hover:bg-green-700 disabled:opacity-60"
-        >
-          {loading ? "Creating account..." : "Create Account"}
-        </button>
-
-        <p className="mt-5 text-center text-sm text-gray-600">
-          Already have an account?{" "}
-          <Link
-            to="/login"
-            className="font-medium text-green-600 hover:underline"
-          >
-            Sign in
-          </Link>
+        <p className="mt-1 text-sm text-gray-500">
+          Get started with your AI workspace
         </p>
       </div>
+
+    
+      <div className="mb-4">
+        <label className="mb-1 block text-sm font-medium text-gray-600">
+          Full name
+        </label>
+        <input
+          placeholder="John Doe"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none transition focus:border-gray-500 focus:ring-2 focus:ring-gray-200"
+        />
+      </div>
+
+
+      <div className="mb-4">
+        <label className="mb-1 block text-sm font-medium text-gray-600">
+          Email address
+        </label>
+        <input
+          type="email"
+          placeholder="you@company.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none transition focus:border-gray-500 focus:ring-2 focus:ring-gray-200"
+        />
+      </div>
+
+ 
+      <div className="mb-5">
+        <label className="mb-1 block text-sm font-medium text-gray-600">
+          Password
+        </label>
+        <input
+          type="password"
+          placeholder="••••••••"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none transition focus:border-gray-500 focus:ring-2 focus:ring-gray-200"
+        />
+      </div>
+
+
+      <button
+        onClick={register}
+        disabled={loading}
+        className="w-full rounded-lg bg-gray-900 py-2.5 text-sm font-medium text-white transition hover:bg-gray-800 disabled:opacity-60"
+      >
+        {loading ? "Creating account..." : "Create Account"}
+      </button>
+
+
+      <p className="mt-6 text-center text-sm text-gray-500">
+        Already have an account?{" "}
+        <Link
+          to="/login"
+          className="font-medium text-gray-900 hover:underline"
+        >
+          Sign in
+        </Link>
+      </p>
     </div>
-  );
+  </div>
+);
+
+
+  
 }

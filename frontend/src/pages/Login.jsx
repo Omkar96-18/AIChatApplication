@@ -52,57 +52,77 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-100 to-indigo-200">
-      <div className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-lg text-center">
-        {success ? (
-          <>
-            <h2 className="text-2xl font-bold text-green-600">
-              Login Successful
-            </h2>
-            <p className="mt-2 text-gray-600">
-              Redirecting to chat...
-            </p>
-          </>
-        ) : (
-          <>
-            <h2 className="mb-6 text-2xl font-bold text-gray-800">
-              Welcome Back
-            </h2>
+  <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-100 via-gray-50 to-gray-200">
+    <div className="w-full max-w-sm rounded-2xl bg-white/90 p-8 text-center shadow-xl backdrop-blur">
 
-            <div className="space-y-4">
-              <input
-                className="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-blue-300"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+      {success ? (
+        <>
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+            <svg
+              className="h-6 w-6 text-green-600"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
 
-              <input
-                type="password"
-                className="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-blue-300"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+          <h2 className="text-2xl font-semibold text-gray-900">
+            Login successful
+          </h2>
+          <p className="mt-2 text-sm text-gray-500">
+            Redirecting you to your workspace…
+          </p>
+        </>
+      ) : (
+        <>
+          <h2 className="mb-1 text-2xl font-semibold text-gray-900">
+            Welcome back
+          </h2>
+          <p className="mb-6 text-sm text-gray-500">
+            Sign in to continue to Atharva.AI
+          </p>
 
-              <button
-                onClick={handleLogin}
-                disabled={loading}
-                className="w-full rounded-lg bg-blue-600 py-2 text-white hover:bg-blue-700 disabled:opacity-60"
-              >
-                {loading ? "Logging in..." : "Login"}
-              </button>
-            </div>
+          <div className="space-y-4">
+            <input
+              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm outline-none transition focus:border-gray-500 focus:ring-2 focus:ring-gray-200"
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-            <p className="mt-6 text-sm text-gray-600">
-              Don’t have an account?{" "}
-              <Link to="/register" className="text-blue-600 hover:underline">
-                Register
-              </Link>
-            </p>
-          </>
-        )}
-      </div>
+            <input
+              type="password"
+              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm outline-none transition focus:border-gray-500 focus:ring-2 focus:ring-gray-200"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <button
+              onClick={handleLogin}
+              disabled={loading}
+              className="w-full rounded-lg bg-gray-900 py-2.5 text-sm font-medium text-white transition hover:bg-gray-800 disabled:opacity-60"
+            >
+              {loading ? "Signing in…" : "Sign in"}
+            </button>
+          </div>
+
+          <p className="mt-6 text-sm text-gray-500">
+            Don’t have an account?{" "}
+            <Link
+              to="/register"
+              className="font-medium text-gray-900 hover:underline"
+            >
+              Create one
+            </Link>
+          </p>
+        </>
+      )}
     </div>
-  );
+  </div>
+);
+
 }
