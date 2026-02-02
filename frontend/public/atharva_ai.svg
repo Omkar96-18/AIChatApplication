@@ -1,0 +1,13 @@
+<svg width="97" height="97" viewBox="0 0 97 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="97" height="97" rx="12" fill="url(#pattern0_5_47)"/>
+    <defs>
+        <pattern id="pattern0_5_47" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image0_5_47" transform="scale(0.01)"/>
+        </pattern>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#007BFF;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#00C6FF;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    <path d="M25 75 L48.5 25 L72 75 M35 60 L62 60" stroke="url(#grad1)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
