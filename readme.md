@@ -14,7 +14,7 @@
 ## Step 1: Clone the Repository
 
 ```bash
-git clone git@github.com:Omkar96-18/AIChatApplication.git
+git clone https://github.com/Omkar96-18/AIChatApplication.git
 cd AIChatApplication
 ```
 
