@@ -1,6 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from pydantic import BaseModel, EmailStr
+from .models import (
+    ChatRequest,
+    ChatResponse, 
+    UserRegisterResponse,
+    UserRegister,
+    UserLogin
+)
 from ..database.models import get_db, User, ChatMessage, ChatSession
 from ..database.db import (
     create_new_chat,
@@ -24,16 +30,7 @@ ist_time = (datetime.utcnow() + timedelta(hours=5, minutes=30)).strftime(
 router = APIRouter()
 
 
-class UserRegisterResponse(BaseModel):
-    message: str
-    user_id: int
-    user_name: str
-    user_email_id: str
 
-class UserRegister(BaseModel):
-    user_name: str
-    user_email_id: EmailStr
-    user_password: str
 
 @router.post("/register", response_model=UserRegisterResponse)
 async def register_user(
@@ -60,9 +57,7 @@ async def register_user(
     }
 
 
-class UserLogin(BaseModel):
-    user_email_id: EmailStr
-    user_password: str
+
 
 @router.post("/login")
 async def login_user(
@@ -83,18 +78,7 @@ async def login_user(
         "token_type": "bearer"
     }
 
-class ChatResponse(BaseModel) :
-    response: str
-    urls: List[str] = []
-    session_id: int
 
-
-class ChatRequest(BaseModel):
-    message: str
-    session_id: Optional[int] = None
-    user_id: int
-    use_web_search: bool = False
-    role: str = "assistant"
 
 
 @router.post("/chat", response_model=ChatResponse)
